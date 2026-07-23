@@ -14,11 +14,11 @@ Deux cahiers, deux univers visuels distincts :
 
 ```
 <moteur>-platformer/
-  sprites/   héros (idle / jump / walk), fond transparent
+  sprites/   héros (idle / jump / walk / swim), fond transparent
   decors/    4 arrière-plans : vallée (herbe), sous l'eau, montagne, volcan
-  ennemis/   4 ennemis (vallée, eau, montagne, volcan), fond transparent
+  ennemis/   5 ennemis (vallée, eau, montagne, volcan, volant), fond transparent
   boss/      le boss du volcan, fond transparent
-  objets/    étoile, pièce, gemme, cœur
+  objets/    étoile, pièce, gemme, cœur, checkpoint, piques (danger)
   sons/      9 bruitages WAV (départ, saut, pièce, power-up, message, aïe,
              victoire, game over, sélection)
 ```
