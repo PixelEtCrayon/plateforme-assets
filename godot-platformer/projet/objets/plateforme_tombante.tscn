@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://objets/plateforme_tombante.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://images/plateforme.png" id="2_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(128, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(120, 12)
+
+[node name="PlateformeTombante" type="AnimatableBody2D"]
+collision_layer = 1
+collision_mask = 0
+sync_to_physics = true
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.85, 0.75, 1)
+position = Vector2(0, 8)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+one_way_collision = true
+
+[node name="Detecteur" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detecteur"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Chrono" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="body_entered" from="Detecteur" to="." method="_on_detecteur_body_entered"]
+[connection signal="timeout" from="Chrono" to="." method="_on_chrono_timeout"]

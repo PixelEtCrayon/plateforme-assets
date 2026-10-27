@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ennemis/drone.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://images/enemy_flying.png" id="2_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tete"]
+size = Vector2(44, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_corps"]
+size = Vector2(50, 30)
+
+[node name="Drone" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_tex")
+
+[node name="Tete" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tete"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_tete")
+
+[node name="Corps" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corps"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_corps")
+
+[connection signal="body_entered" from="Tete" to="." method="_on_tete_body_entered"]
+[connection signal="body_entered" from="Corps" to="." method="_on_corps_body_entered"]

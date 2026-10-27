@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/menu.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://images/robot_idle.png" id="2_robi"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Fond" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.23, 0.34, 1)
+
+[node name="Robi" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -340.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_robi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Boite" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_top = -250.0
+offset_right = 620.0
+offset_bottom = 250.0
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Titre" type="Label" parent="Boite"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Robi et la Grande Panne"
+
+[node name="Jouer" type="Button" parent="Boite"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Jouer"
+
+[node name="Secteurs" type="HBoxContainer" parent="Boite"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Jardin" type="Button" parent="Boite/Secteurs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Jardin"
+
+[node name="Inondé" type="Button" parent="Boite/Secteurs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inondé"
+
+[node name="Gelé" type="Button" parent="Boite/Secteurs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gelé"
+
+[node name="Réacteur" type="Button" parent="Boite/Secteurs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Réacteur"
+
+[node name="Etoiles" type="Label" parent="Boite"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Etoiles : 0 / 12"
+
+[node name="Effacer" type="Button" parent="Boite"]
+layout_mode = 2
+text = "Effacer la sauvegarde"
+
+[node name="Quitter" type="Button" parent="Boite"]
+layout_mode = 2
+text = "Quitter"
+
+[connection signal="pressed" from="Boite/Jouer" to="." method="_on_jouer_pressed"]
+[connection signal="pressed" from="Boite/Secteurs/Jardin" to="." method="_on_secteur_pressed" binds= [0]]
+[connection signal="pressed" from="Boite/Secteurs/Inondé" to="." method="_on_secteur_pressed" binds= [1]]
+[connection signal="pressed" from="Boite/Secteurs/Gelé" to="." method="_on_secteur_pressed" binds= [2]]
+[connection signal="pressed" from="Boite/Secteurs/Réacteur" to="." method="_on_secteur_pressed" binds= [3]]
+[connection signal="pressed" from="Boite/Effacer" to="." method="_on_effacer_pressed"]
+[connection signal="pressed" from="Boite/Quitter" to="." method="_on_quitter_pressed"]

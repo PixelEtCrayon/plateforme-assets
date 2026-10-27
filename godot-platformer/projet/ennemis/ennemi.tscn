@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://ennemis/ennemi.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://images/enemy_valley.png" id="2_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_corps"]
+size = Vector2(56, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tete"]
+size = Vector2(50, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flanc"]
+size = Vector2(60, 40)
+
+[node name="Ennemi" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_corps")
+
+[node name="DetecteurVide" type="RayCast2D" parent="."]
+position = Vector2(-34, 0)
+target_position = Vector2(0, 60)
+collision_mask = 1
+
+[node name="Tete" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tete"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_tete")
+
+[node name="Corps" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corps"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_flanc")
+
+[connection signal="body_entered" from="Tete" to="." method="_on_tete_body_entered"]
+[connection signal="body_entered" from="Corps" to="." method="_on_corps_body_entered"]

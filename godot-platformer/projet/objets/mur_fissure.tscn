@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://objets/mur_fissure.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://tuiles/gele.png" id="2_tuiles"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bloc"]
+atlas = ExtResource("2_tuiles")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mur"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detecteur"]
+size = Vector2(80, 60)
+
+[node name="MurFissure" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.85, 0.7, 1)
+texture = SubResource("AtlasTexture_bloc")
+
+[node name="Fissure" type="Line2D" parent="."]
+points = PackedVector2Array(-20, -28, -4, -8, -14, 6, 6, 28)
+width = 4.0
+default_color = Color(0.2, 0.15, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mur")
+
+[node name="Detecteur" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detecteur"]
+shape = SubResource("RectangleShape2D_detecteur")
